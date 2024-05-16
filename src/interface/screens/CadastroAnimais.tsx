@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from "react-native";
 import axios from 'axios';
 
+
 const CadastroAnimal = () => {
     const [animais, setAnimais] = useState<Animal[]>([]);
     const [nome, setNome] = useState<string>('');
