@@ -41,9 +41,9 @@ const Cardapio = () => {
             <View style={styles.itemContainer}>
                 <TouchableOpacity style={styles.item}>
                     <View style={styles.text}>
-                        <Text style={styles.tituloBolos}>{item.nome}</Text>
-                        <Text style={styles.preco}>Idade: {item.idade}</Text>
-                        <Text style={styles.textColor}>Espécie: {item.especie}</Text>
+                        <Text style={styles.nome}>{item.nome}</Text>
+                        <Text style={styles.idade}>Idade: {item.idade}</Text>
+                        <Text style={styles.especie}>Espécie: {item.especie}</Text>
                         <Text>RA: {item.ra}</Text>
                         <Text>Peso: {item.peso} kg</Text>
                         <Text>Altura: {item.altura} cm</Text>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     item: {
-        backgroundColor: '#feedc6',
+        backgroundColor: '#606c38',
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 8,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         height: 100,
         marginRight: 25
     },
-    textColor: {
+    especie: {
         fontWeight: 'bold',
         color: 'black'
     },
@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
     },
-    tituloBolos: {
+    nome: {
         fontWeight: 'bold',
         color: 'black',
         fontSize: 20,
         textAlign: 'center',
         marginBottom: 10,
     },
-    preco: {
+    idade: {
         fontWeight: 'bold',
         color: 'red',
         fontSize: 20,
