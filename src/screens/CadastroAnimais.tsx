@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, Alert } from "react-native";
 import axios from 'axios';
+import Head from "../components/Head";
+import Footer from "../components/Footer";
 
 
 const CadastroAnimal = () => {
@@ -43,9 +45,12 @@ const CadastroAnimal = () => {
 
 
     return (
+       
         <ScrollView style={styles.container}>
             <StatusBar backgroundColor="black" barStyle="light-content" />
+           
             <View style={styles.header}>
+            
                 <Image source={logo} style={styles.logo} />
             </View>
             <View style={styles.form}>
@@ -98,6 +103,7 @@ const CadastroAnimal = () => {
                     <Image
                         source={require('../assets/images/home.png')}
                         style={styles.footerIcon}
+
                     />
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -108,12 +114,15 @@ const CadastroAnimal = () => {
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <Image
-                        source={require('../assets/images/menu.png')}
+                        source={require('../assets/images/lupa.png')}
                         style={styles.footerIcon}
                     />
                 </TouchableOpacity>
             </View>
+          
         </ScrollView>
+
+    
     );
 }
 const styles = StyleSheet.create({
@@ -126,8 +135,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logo: {
-        width: 130,
-        height: 100,
+        width: 200,
+        height: 130,
     },
     form: {
         padding: 10,
@@ -159,20 +168,35 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'white',
-        paddingVertical: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 'auto',
+    
     },
     footer: {
-        borderTopWidth: 1,
-        backgroundColor: 'white',
+        borderTopWidth: 1.5,
+        backgroundColor: '#f0f0f0', // Alterado para um cinza claro para contrastar com o fundo branco
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingVertical: 20,
+        paddingVertical: 15, // Ajustado para um valor menor para um espaçamento mais fino
+        paddingHorizontal: 20, // Adicionado para criar um espaço horizontal confortável
+        shadowColor: "#000", // Adicionado para dar sombra
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5, // Opicional para Android
+        
     },
+
     footerIcon: {
-        width: 30,
-        height: 30,
+        width: 24, // Reduzido para um tamanho mais adequado
+        height: 24, // Reduzido para manter proporção
+        margin: 10, // Adicionado para criar espaço entre os ícones
     },
+
 });
 
 
