@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from "react-native";
+import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, Alert } from "react-native";
 import axios from 'axios';
 
 
@@ -25,11 +25,11 @@ const CadastroAnimal = () => {
             formData.append('especie', especie);
             formData.append('ra', ra);
             formData.append('peso', peso);
-            formData.append('altura',altura);
+            formData.append('altura', altura);
             formData.append('sexo', sexo);
             formData.append('dieta', dieta);
             formData.append('habitat', habitat);
-           
+
             const response = await axios.post('http://10.137.11.225:8000/api/animal/cadastrar', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -40,7 +40,7 @@ const CadastroAnimal = () => {
             console.log(error);
         }
     }
-        
+
 
     return (
         <ScrollView style={styles.container}>
@@ -53,51 +53,64 @@ const CadastroAnimal = () => {
                 <TextInput
                     style={styles.input}
                     placeholder="Nome do Animal"
-                    value={nome}
                     onChangeText={setNome} />
                 <TextInput
                     style={styles.input}
                     placeholder="Idade"
-                    value={String(idade)}
                     onChangeText={setIdade} />
                 <TextInput
                     style={styles.input}
                     placeholder="Espécie"
-                    value={especie}
                     onChangeText={setEspecie} />
                 <TextInput
                     style={styles.input}
                     placeholder="RA"
-                    value={ra}
                     onChangeText={setRa} />
                 <TextInput
                     style={styles.input}
-                    placeholder="Peso"
-                    value={peso}
+                    placeholder="Peso em Kg"
+                    keyboardType="decimal-pad"
                     onChangeText={setPeso} />
                 <TextInput
                     style={styles.input}
-                    placeholder="Altura"
-                    value={(altura)}
+                    placeholder="Altura em Cm"
+                    keyboardType="decimal-pad"
                     onChangeText={setAltura} />
                 <TextInput
                     style={styles.input}
                     placeholder="Sexo"
-                    value={sexo}
                     onChangeText={setSexo} />
                 <TextInput
                     style={styles.input}
                     placeholder="Dieta"
-                    value={dieta}
                     onChangeText={setDieta} />
                 <TextInput
                     style={styles.input}
                     placeholder="Habitat"
-                    value={habitat}
                     onChangeText={setHabitat} />
-               
+
                 <TouchableOpacity style={styles.imageButton} onPress={cadastrarAnimal}>
                     <Text style={styles.imageButtonText}>Cadastrar Animal</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.footer}>
+                <TouchableOpacity >
+                    <Image
+                        source={require('../assets/images/home.png')}
+                        style={styles.footerIcon}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image
+                        source={require('../assets/images/profile.png')}
+                        style={styles.footerIcon}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image
+                        source={require('../assets/images/menu.png')}
+                        style={styles.footerIcon}
+                    />
                 </TouchableOpacity>
             </View>
         </ScrollView>

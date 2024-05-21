@@ -3,7 +3,7 @@ import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } 
 import axios from 'axios';
 
 interface Animal {
-    id: number;
+    id: string;
     nome: string;
     idade: string;
     especie: string;
@@ -18,7 +18,6 @@ interface Animal {
 
 const Cardapio = () => {
     const [dados, setDados] = useState<Animal[]>([]);
-    const [mensagemSucesso, setMensagemSucesso] = useState('');
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -38,20 +37,24 @@ const Cardapio = () => {
     }, []);
 
     const renderItem = ({ item }: { item: Animal }) => {
-
-
         return (
             <View style={styles.itemContainer}>
                 <TouchableOpacity style={styles.item}>
                     <View style={styles.text}>
                         <Text style={styles.tituloBolos}>{item.nome}</Text>
-                        <Text style={styles.preco}>{item.idade}</Text>
-                        <Text style={styles.textColor}>{item.especie}</Text>
+                        <Text style={styles.preco}>Idade: {item.idade}</Text>
+                        <Text style={styles.textColor}>Espécie: {item.especie}</Text>
+                        <Text>RA: {item.ra}</Text>
+                        <Text>Peso: {item.peso} kg</Text>
+                        <Text>Altura: {item.altura} cm</Text>
+                        <Text>Sexo: {item.sexo}</Text>
+                        <Text>Dieta: {item.dieta}</Text>
+                        <Text>Hábitat: {item.habitat}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         );
-    }
+    };
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle='light-content' />
@@ -62,15 +65,8 @@ const Cardapio = () => {
             <FlatList
                 data={dados}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.id}
             />
-            {mensagemSucesso && (
-                <View style={styles.mensagemSucessoContainer}>
-                    <Text style={styles.mensagemSucessoText}>{mensagemSucesso}</Text>
-                </View>
-            )}
-
-
         </View>
     );
 }
@@ -153,43 +149,7 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 8,
     },
-    addButton: {
-        position: 'absolute',
-        right: 10,
-        bottom: 10,
-    },
-    addIcon: {
-        width: 30,
-        height: 30,
-    }, carrinhoBadge: {
-        position: 'absolute',
-        right: -6,
-        top: -3,
-        backgroundColor: 'red',
-        borderRadius: 10,
-        width: 20,
-        height: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    carrinhoBadgeText: {
-        color: 'white',
-        fontWeight: 'bold',
-    }, mensagemSucessoContainer: {
-        backgroundColor: '#d4edda',
-        borderColor: '#c3e6cb',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
-        marginHorizontal: 20,
-        marginVertical: 10,
-    },
-    mensagemSucessoText: {
-        color: '#155724',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-
+   
 
 
 });
