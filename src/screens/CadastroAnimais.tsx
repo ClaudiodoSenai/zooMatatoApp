@@ -53,6 +53,9 @@ const CadastroAnimal = () => {
             
                 <Image source={logo} style={styles.logo} />
             </View>
+
+             
+
             <View style={styles.form}>
                 <Text style={styles.fText}>Cadastro de Animais</Text>
                 <TextInput
@@ -184,27 +187,27 @@ const styles = StyleSheet.create({
     },
     footer: {
         borderTopWidth: 1.5,
-        backgroundColor: '#fefae0', // Alterado para um cinza claro para contrastar com o fundo branco
+        backgroundColor: '#fefae0', 
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingVertical: 15, // Ajustado para um valor menor para um espaçamento mais fino
-        paddingHorizontal: 20, // Adicionado para criar um espaço horizontal confortável
-        shadowColor: "#000", // Adicionado para dar sombra
+        paddingVertical: 15, 
+        paddingHorizontal: 20, 
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 2,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5, // Opicional para Android
+        elevation: 5, 
         
     },
 
     footerIcon: {
-        width: 24, // Reduzido para um tamanho mais adequado
-        height: 24, // Reduzido para manter proporção
-        margin: 10, // Adicionado para criar espaço entre os ícones
+        width: 24,
+        height: 24, 
+        margin: 10, 
     },
 
 });
