@@ -98,7 +98,17 @@ const CadastroAnimal = () => {
                     <Text style={styles.imageButtonText}>Cadastrar Animal</Text>
                 </TouchableOpacity>
             </View>
+
+           
             <View style={styles.footer}>
+
+            <TouchableOpacity>
+                    <Image
+                        source={require('../assets/images/menu.png')}
+                        style={styles.footerIcon}
+                    />
+                    </TouchableOpacity>
+                    
                 <TouchableOpacity >
                     <Image
                         source={require('../assets/images/home.png')}
@@ -167,14 +177,14 @@ const styles = StyleSheet.create({
     fText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'black',
         paddingVertical: 12,
         paddingHorizontal: 'auto',
     
     },
     footer: {
         borderTopWidth: 1.5,
-        backgroundColor: '#f0f0f0', // Alterado para um cinza claro para contrastar com o fundo branco
+        backgroundColor: '#fefae0', // Alterado para um cinza claro para contrastar com o fundo branco
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
