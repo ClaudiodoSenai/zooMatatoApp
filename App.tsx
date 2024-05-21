@@ -6,10 +6,10 @@ import ListagemAnimais from "./src/screens/ListagemAnimais";
 function App(): JSX.Element {
 
    return (
-    <CadastroAnimais />
-   // <ListagemAnimais />
+    // <CadastroAnimais />
+   <ListagemAnimais />
    );
 
 }
 
-export default App
+export default App;
