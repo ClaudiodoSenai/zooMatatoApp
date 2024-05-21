@@ -44,7 +44,7 @@ const CadastroAnimal = () => {
 
     return (
         <ScrollView style={styles.container}>
-            <StatusBar backgroundColor="#ffdab9" barStyle="light-content" />
+            <StatusBar backgroundColor="black" barStyle="light-content" />
             <View style={styles.header}>
                 <Image source={logo} style={styles.logo} />
             </View>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     header: {
-        backgroundColor: '#ffdab9',
+        backgroundColor: '#606c38',
         paddingVertical: 10,
         alignItems: 'center',
     },
@@ -131,22 +131,23 @@ const styles = StyleSheet.create({
     },
     form: {
         padding: 10,
-        backgroundColor: 'white',
+        backgroundColor: '#ccd5ae',
         marginBottom: 10,
         paddingVertical: 30,
     },
     input: {
         height: 40,
-        borderColor: 'gray',
+        borderColor: 'white',
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
         borderRadius: 10,
+        backgroundColor: '#fefae0'
     },
     imageButton: {
-        backgroundColor: '#ffdab9',
+        backgroundColor: '#606c38',
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 20,
         alignItems: 'center',
         marginBottom: 10,
     },
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     fText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'black',
+        color: 'white',
         paddingVertical: 10,
     },
     footer: {
