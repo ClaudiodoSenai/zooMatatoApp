@@ -6,7 +6,7 @@ import ListagemAnimais from "./src/screens/ListagemAnimais";
 function App(): JSX.Element {
 
    return (
-    // <CadastroAnimais />
+    //<CadastroAnimais />
     <ListagemAnimais />
    
    );

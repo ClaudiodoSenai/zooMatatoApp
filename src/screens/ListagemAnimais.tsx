@@ -77,13 +77,13 @@ const ListagemAnimal = () => {
                         <Text style={styles.text}>Dieta: {item.dieta}</Text>
                         <Text style={styles.text}>Habitat: {item.habitat}</Text>
 
-                        <View>
+                        <View style ={styles.actions}>
                             <TouchableOpacity onPress={() => atualizarAnimal(item.id, { nome: 'Novo Nome', idade: 'Nova Idade' })}>
-                                <Text>Editar</Text>
+                            <Image source={require('../assets/images/update.png')} style={styles.updateIcon} />  
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => deletarAnimal(item.id)}>
-                                <Text>Excluir</Text>
-                            </TouchableOpacity>
+                            <Image source={require('../assets/images/delete.png')} style={styles.deleteIcon} />
+                        </TouchableOpacity>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -147,8 +147,21 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 8,
     },
-
-
+    actions: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginTop: 10,
+    },
+    deleteIcon: {
+        width: 30, 
+        height: 30, 
+        marginRight: 10, 
+    },
+    updateIcon: {
+        width: 30, 
+        height: 30, 
+        marginRight: 10, 
+    }
 
 });
 
