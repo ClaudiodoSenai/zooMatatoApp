@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, Alert } from "react-native";
 import axios from 'axios';
-import Head from "../components/Head";
 import Footer from "../components/Footer";
 
 
@@ -45,17 +44,12 @@ const CadastroAnimal = () => {
 
 
     return (
-       
-        <ScrollView style={styles.container}>
+       <View style={styles.container}>
+        <ScrollView >
             <StatusBar backgroundColor="black" barStyle="light-content" />
-           
             <View style={styles.header}>
-            
                 <Image source={logo} style={styles.logo} />
             </View>
-
-             
-
             <View style={styles.form}>
                 <Text style={styles.fText}>Cadastro de Animais</Text>
                 <TextInput
@@ -101,40 +95,9 @@ const CadastroAnimal = () => {
                     <Text style={styles.imageButtonText}>Cadastrar Animal</Text>
                 </TouchableOpacity>
             </View>
-
-           
-            <View style={styles.footer}>
-
-            <TouchableOpacity>
-                    <Image
-                        source={require('../assets/images/menu.png')}
-                        style={styles.footerIcon}
-                    />
-                    </TouchableOpacity>
-                    
-                <TouchableOpacity >
-                    <Image
-                        source={require('../assets/images/home.png')}
-                        style={styles.footerIcon}
-
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image
-                        source={require('../assets/images/profile.png')}
-                        style={styles.footerIcon}
-                    />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image
-                        source={require('../assets/images/lupa.png')}
-                        style={styles.footerIcon}
-                    />
-                </TouchableOpacity>
-            </View>
-          
         </ScrollView>
-
+          <Footer />
+</View>
     
     );
 }
@@ -154,12 +117,11 @@ const styles = StyleSheet.create({
     form: {
         padding: 10,
         backgroundColor: '#ccd5ae',
-        marginBottom: 10,
         paddingVertical: 30,
     },
     input: {
         height: 40,
-        borderColor: 'white',
+        borderColor: 'black',
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
@@ -185,32 +147,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 'auto',
     
     },
-    footer: {
-        borderTopWidth: 1.5,
-        backgroundColor: '#fefae0', 
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        paddingVertical: 15, 
-        paddingHorizontal: 20, 
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5, 
-        
-    },
-
-    footerIcon: {
-        width: 24,
-        height: 24, 
-        margin: 10, 
-    },
-
+    
 });
-
 
 export default CadastroAnimal;
