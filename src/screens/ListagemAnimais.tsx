@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import axios from 'axios';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 interface Animal {
     id: string;
@@ -8,28 +10,27 @@ interface Animal {
     idade: string;
     especie: string;
     ra: string;
-    peso: number;
-    altura: number;
+    peso: number; 
+    altura: number; 
     sexo: string;
     dieta: string;
     habitat: string;
 }
 
-
-const Cardapio = () => {
-    const [dados, setDados] = useState<Animal[]>([]);
+const ListagemAnimal = () => {
+    const [dados, setDados] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
+        useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get<Animal[]>('http://10.137.11.225:8000/api/animal/todos');
+                const response = await axios.get('http://10.137.11.225:8000/api/animal/todos');
                 console.log('Dados recebidos da API:', response.data);
-                setDados(response.data);
-                console.log("dados da api" + dados);
+                setDados(response.data.data); 
+                console.log("dados da api", dados); 
             } catch (error) {
                 console.error('Erro ao buscar os dados:', error);
-                setError("Ocorreu um erro ao buscar os bolos");
+                setError("Ocorreu um erro ao buscar os bolos"); 
             }
         };
 
@@ -43,30 +44,29 @@ const Cardapio = () => {
                     <View style={styles.text}>
                         <Text style={styles.nome}>{item.nome}</Text>
                         <Text style={styles.idade}>Idade: {item.idade}</Text>
-                        <Text style={styles.especie}>Espécie: {item.especie}</Text>
-                        <Text>RA: {item.ra}</Text>
-                        <Text>Peso: {item.peso} kg</Text>
-                        <Text>Altura: {item.altura} cm</Text>
-                        <Text>Sexo: {item.sexo}</Text>
-                        <Text>Dieta: {item.dieta}</Text>
-                        <Text>Hábitat: {item.habitat}</Text>
+                        <Text style={styles.text}>Espécie: {item.especie}</Text>
+                        <Text style={styles.text}>RA: {item.ra}</Text>
+                        <Text style={styles.text}>Peso: {item.peso} kg</Text>
+                        <Text style={styles.text}>Altura: {item.altura} cm</Text> 
+                        <Text style={styles.text}>Sexo: {item.sexo}</Text>
+                        <Text style={styles.text}>Dieta: {item.dieta}</Text>
+                        <Text style={styles.text}>Hábitat: {item.habitat}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         );
     };
+
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor="black" barStyle='light-content' />
-            <View style={styles.header}>
-                <Image source={require('../assets/images/logo.png')} style={styles.logo} />
-            </View>
-
-            <FlatList
-                data={dados}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id}
-            />
+                <StatusBar backgroundColor="black" barStyle='light-content' />
+                <Header />
+                <FlatList
+                    data={dados}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
+            <Footer />
         </View>
     );
 }
@@ -86,42 +86,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    header: {
-        backgroundColor: '#606c38',
-        alignItems: 'center',
-        paddingVertical: 20
-    },
-    headerText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'black'
-    },
-    footer: {
-        borderTopWidth: 0.2,
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        paddingVertical: 10
-    },
-    footerIcon: {
-        width: 30,
-        height: 30
-    },
-    image: {
-        width: 130,
-        height: 100,
-        marginRight: 25
-    },
-    especie: {
-        fontWeight: 'bold',
-        color: 'black'
-    },
-    logo: {
-        width: 130,
-        height: 100
-    },
     text: {
+        color:'white',
+        fontWeight: 'bold',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -129,18 +96,15 @@ const styles = StyleSheet.create({
     },
     nome: {
         fontWeight: 'bold',
-        color: 'black',
-        fontSize: 20,
+        color: 'white',
+        fontSize: 25,
         textAlign: 'center',
-        marginBottom: 10,
     },
     idade: {
         fontWeight: 'bold',
-        color: 'red',
+        color: 'white',
         fontSize: 20,
         marginBottom: 10,
-        backgroundColor: 'yellow',
-        borderRadius: 10
     },
     itemContainer: {
         flexDirection: 'row',
@@ -149,9 +113,9 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 8,
     },
-   
+
 
 
 });
 
-export default Cardapio;
+export default ListagemAnimal;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, Alert } from "react-native";
 import axios from 'axios';
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 
 const CadastroAnimal = () => {
@@ -15,8 +16,6 @@ const CadastroAnimal = () => {
     const [sexo, setSexo] = useState<string>('');
     const [dieta, setDieta] = useState<string>('');
     const [habitat, setHabitat] = useState<string>('');
-
-    const logo = require('../assets/images/logo.png');
 
     const cadastrarAnimal = async () => {
         try {
@@ -47,9 +46,7 @@ const CadastroAnimal = () => {
        <View style={styles.container}>
         <ScrollView >
             <StatusBar backgroundColor="black" barStyle="light-content" />
-            <View style={styles.header}>
-                <Image source={logo} style={styles.logo} />
-            </View>
+            <Header />
             <View style={styles.form}>
                 <Text style={styles.fText}>Cadastro de Animais</Text>
                 <TextInput
@@ -104,15 +101,6 @@ const CadastroAnimal = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    header: {
-        backgroundColor: '#606c38',
-        paddingVertical: 10,
-        alignItems: 'center',
-    },
-    logo: {
-        width: 200,
-        height: 130,
     },
     form: {
         padding: 10,
