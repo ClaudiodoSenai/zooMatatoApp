@@ -24,7 +24,7 @@ function Footer(): React.JSX.Element {
 
                 />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Listagem')}>
+            <TouchableOpacity >
                 <Image
                     source={require('../assets/images/profile.png')}
                     style={styles.footerIcon}
