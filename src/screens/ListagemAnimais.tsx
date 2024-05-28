@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, FlatList, Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native-gesture-handler';
 
 interface Animal {
     id: string;
@@ -23,7 +22,6 @@ const ListagemAnimal = () => {
     const [dados, setDados] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [pesquisaAnimal, setPesquisaAnimal] = useState("");
-
 
     const fetchData = async () => {
         try {
@@ -57,7 +55,7 @@ const ListagemAnimal = () => {
         navigation.navigate('EditarAnimais', {animal});
     }
 
-    const buscarPorNome = async () => {
+    const buscarAnimal = async () => {
         try {
             const response = await axios.post('http://10.137.11.225/ZooMatato/public/api/animal/pesquisar/nome', { nome: pesquisaAnimal }, {
                 headers: {
@@ -73,13 +71,8 @@ const ListagemAnimal = () => {
             }
         } catch (error) {
             console.error(error);
-            Alert.alert("Erro", "Ocorreu um erro ao buscar os animais.");
         }
     };
-    
-
-
-
 
     const renderItem = ({ item }: { item: Animal }) => {
         return (
@@ -98,11 +91,11 @@ const ListagemAnimal = () => {
 
                         <View style ={styles.actions}>
                             <TouchableOpacity onPress={() => editarAnimais(item)}>
-                            <Image source={require('../assets/images/update.png')} style={styles.updateIcon} />  
+                                <Image source={require('../assets/images/update.png')} style={styles.updateIcon} />  
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => deletarAnimal(item.id)}>
-                            <Image source={require('../assets/images/delete.png')} style={styles.deleteIcon} />
-                        </TouchableOpacity>
+                                <Image source={require('../assets/images/delete.png')} style={styles.deleteIcon} />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -120,12 +113,14 @@ const ListagemAnimal = () => {
                     onChangeText={setPesquisaAnimal}
                     value={pesquisaAnimal}
                     placeholder="Pesquisar animal..."
+                    onEndEditing={buscarAnimal} // Chama buscarAnimal quando o texto termina de ser editado
+                    onChangeText={(text) => {
+                        setPesquisaAnimal(text);
+                    }}
                 />
             </View>
             <FlatList
-                data={dados.filter((item) =>
-                    item.nome.toLowerCase().includes(pesquisaAnimal.toLowerCase())
-                )}
+                data={dados}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
@@ -133,7 +128,6 @@ const ListagemAnimal = () => {
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -191,7 +185,6 @@ const styles = StyleSheet.create({
         height: 30, 
         marginRight: 10, 
     }
-
 });
 
 export default ListagemAnimal;
