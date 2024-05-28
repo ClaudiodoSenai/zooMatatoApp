@@ -3,6 +3,7 @@ import { Alert, FlatList, Image, ScrollView, StatusBar, StyleSheet, Text, Toucha
 import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useNavigation } from '@react-navigation/native';
 
 interface Animal {
     id: string;
@@ -28,7 +29,7 @@ const ListagemAnimal = () => {
             setDados(response.data.data);
         } catch (error) {
             console.error('Erro ao buscar os dados:', error);
-            setError("Ocorreu um erro ao buscar os bolos");
+            setError("Ocorreu um erro ao buscar os animais");
         }
     };
 
@@ -47,17 +48,11 @@ const ListagemAnimal = () => {
         }
     };
 
-    const atualizarAnimal = async (id: string, dadosAtualizacao: Partial<Animal>) => {
-        try {
-            await axios.post(`http://10.137.11.225:8000/api/animal/atualizar/${id}`, dadosAtualizacao);
-            Alert.alert("Sucesso!", "Animal atualizado com sucesso.");
-            fetchData();
-        } catch (error) {
-            console.error(error);
-            Alert.alert("Erro!", "Ocorreu um erro ao atualizar o animal.");
-        }
-    };
+    const navigation = useNavigation();
 
+    const editarAnimais = (animal: Animal)=>{
+        navigation.navigate('EditarAnimais', {animal});
+    }
 
 
 
@@ -78,7 +73,7 @@ const ListagemAnimal = () => {
                         <Text style={styles.text}>Habitat: {item.habitat}</Text>
 
                         <View style ={styles.actions}>
-                            <TouchableOpacity onPress={() => atualizarAnimal(item.id, { nome: 'Novo Nome', idade: 'Nova Idade' })}>
+                            <TouchableOpacity onPress={() => editarAnimais(item)}>
                             <Image source={require('../assets/images/update.png')} style={styles.updateIcon} />  
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => deletarAnimal(item.id)}>

@@ -3,6 +3,7 @@ import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, 
 import axios from 'axios';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useNavigation } from "@react-navigation/native";
 
 
 const CadastroAnimal = () => {
