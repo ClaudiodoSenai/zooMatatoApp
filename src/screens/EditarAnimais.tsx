@@ -17,7 +17,7 @@ const EditarAnimais = ({ route }: { route: any }) => {
     const [sexo, setSexo] = useState(animal.sexo);
     const [dieta, setDieta] = useState(animal.dieta);
     const [habitat, setHabitat] = useState(animal.habitat);
-    const [updateSuccess, setUpdateSuccess] = useState(false); // Estado para controlar a navegação
+    const [updateSuccess, setUpdateSuccess] = useState(false); 
 
     useEffect(() => {
         if (updateSuccess) {
@@ -32,7 +32,7 @@ const EditarAnimais = ({ route }: { route: any }) => {
 
     const salvarAlteracoes = async () => {
         try {
-            await axios.post(`http://10.137.11.225:8000/api/animal/atualizar/${animal.id}`, {
+            await axios.post(`http://10.137.11.225/ZooMatato/public/api/animal/atualizar/${animal.id}`, {
                 nome,
                 idade,
                 especie,

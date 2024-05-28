@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigation } from '@react-navigation/native';
+import { TextInput } from 'react-native-gesture-handler';
 
 interface Animal {
     id: string;
@@ -21,10 +22,12 @@ interface Animal {
 const ListagemAnimal = () => {
     const [dados, setDados] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [pesquisaAnimal, setPesquisaAnimal] = useState("");
+
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://10.137.11.225:8000/api/animal/todos');
+            const response = await axios.get('http://10.137.11.225/ZooMatato/public/api/animal/todos');
             console.log('Dados recebidos da API:', response.data);
             setDados(response.data.data);
         } catch (error) {
@@ -39,7 +42,7 @@ const ListagemAnimal = () => {
 
     const deletarAnimal = async (id: string) => {
         try {
-            await axios.delete(`http://10.137.11.225:8000/api/animal/excluir/${id}`);
+            await axios.delete(`http://10.137.11.225/ZooMatato/public/api/animal/excluir/${id}`);
             Alert.alert("Sucesso!", "Animal deletado com sucesso.");
             fetchData(); 
         } catch (error) {
@@ -53,6 +56,27 @@ const ListagemAnimal = () => {
     const editarAnimais = (animal: Animal)=>{
         navigation.navigate('EditarAnimais', {animal});
     }
+
+    const buscarPorNome = async () => {
+        try {
+            const response = await axios.post('http://10.137.11.225/ZooMatato/public/api/animal/pesquisar/nome', { nome: pesquisaAnimal }, {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.data.status === true) {
+                setDados(response.data.data);
+            } else {
+                setDados([]);
+                Alert.alert("Atenção", "Nenhum animal encontrado.");
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Erro", "Ocorreu um erro ao buscar os animais.");
+        }
+    };
+    
 
 
 
@@ -90,8 +114,18 @@ const ListagemAnimal = () => {
         <View style={styles.container}>
             <StatusBar backgroundColor="black" barStyle='light-content' />
             <Header />
+            <View style={{ padding: 10 }}>
+                <TextInput
+                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    onChangeText={setPesquisaAnimal}
+                    value={pesquisaAnimal}
+                    placeholder="Pesquisar animal..."
+                />
+            </View>
             <FlatList
-                data={dados}
+                data={dados.filter((item) =>
+                    item.nome.toLowerCase().includes(pesquisaAnimal.toLowerCase())
+                )}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
