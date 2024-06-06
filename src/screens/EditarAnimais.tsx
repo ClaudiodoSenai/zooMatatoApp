@@ -8,6 +8,7 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 const EditarAnimais = ({ route }: { route: any }) => {
     const navigation = useNavigation();
     const { animal } = route.params;
+
     const [nome, setNome] = useState(animal.nome);
     const [idade, setIdade] = useState(animal.idade);
     const [especie, setEspecie] = useState(animal.especie);
@@ -19,6 +20,7 @@ const EditarAnimais = ({ route }: { route: any }) => {
     const [habitat, setHabitat] = useState(animal.habitat);
     const [updateSuccess, setUpdateSuccess] = useState(false); 
 
+    
     useEffect(() => {
         if (updateSuccess) {
             navigation.dispatch(

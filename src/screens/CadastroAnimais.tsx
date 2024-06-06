@@ -5,9 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useNavigation } from "@react-navigation/native";
 
-
 const CadastroAnimal = () => {
-    const [animais, setAnimais] = useState<Animal[]>([]);
     const [nome, setNome] = useState<string>('');
     const [idade, setIdade] = useState<string>('');
     const [especie, setEspecie] = useState<string>('');
@@ -18,7 +16,21 @@ const CadastroAnimal = () => {
     const [dieta, setDieta] = useState<string>('');
     const [habitat, setHabitat] = useState<string>('');
 
+    const navigation = useNavigation(); // Hook para navegação
+
+    const validarCampos = () => {
+        if (!nome ||!idade ||!especie ||!ra ||!peso ||!altura ||!sexo ||!dieta ||!habitat) {
+            Alert.alert("Erro", "Todos os campos são obrigatórios.");
+            return false;
+        }
+        return true;
+    };
+
     const cadastrarAnimal = async () => {
+        if (!validarCampos()) {
+            return; // Sai da função se a validação falhar
+        }
+
         try {
             const formData = new FormData();
             formData.append('nome', nome);
@@ -31,21 +43,27 @@ const CadastroAnimal = () => {
             formData.append('dieta', dieta);
             formData.append('habitat', habitat);
 
-            const response = await axios.post('http://10.137.11.225:8000/api/animal/cadastrar', formData, {
+            const response = await axios.post('http://10.137.11.225/ZooMatato/public/api/animal/cadastrar', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.log(response.data);
+
+            if (response.status === 200) {
+                Alert.alert("Sucesso", "Animal cadastrado com sucesso!");
+                navigation.navigate('Listagem'); // Redireciona para a tela de listagem
+            } else {
+                Alert.alert("Erro", "Não foi possível cadastrar o animal. Por favor, tente novamente.");
+            }
         } catch (error) {
             console.log(error);
+            Alert.alert("Erro", "Não foi possível cadastrar o animal. Por favor, tente novamente.");
         }
     }
 
-
     return (
        <View style={styles.container}>
-        <ScrollView >
+        <ScrollView>
             <StatusBar backgroundColor="black" barStyle="light-content" />
             <Header />
             <View style={styles.form}>
@@ -96,9 +114,9 @@ const CadastroAnimal = () => {
         </ScrollView>
           <Footer />
 </View>
-    
     );
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -134,9 +152,7 @@ const styles = StyleSheet.create({
         color: 'black',
         paddingVertical: 12,
         paddingHorizontal: 'auto',
-    
     },
-    
 });
 
 export default CadastroAnimal;
